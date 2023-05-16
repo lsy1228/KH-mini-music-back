@@ -72,14 +72,14 @@ public class MemberController {
     public ResponseEntity<Boolean> memberRegister(@RequestBody Map<String, String> regData) {
         //  HTTP 요청 바디에 담긴 JSON 데이터를 자바 객체로 매핑하는 역할을 함
         // 요청 바디의 내용은 Map<String, String> 타입의 regData 변수에 저장
-        String getId = regData.get("user_id");
-        String getPwd = regData.get("user_pwd");
-        String getPwdCh = regData.get("user_pwdch");
-        String getName = regData.get("user_name");
-        String getMail = regData.get("user_email");
-        String getPhone = regData.get("user_phone");
-        String getAddr = regData.get("user_addr");
-        String getRrn = regData.get("rrn");
+        String getId = regData.get("USER_ID");
+        String getPwd = regData.get("USER_PWD");
+        String getPwdCh = regData.get("USER_PWDCH");
+        String getName = regData.get("USER_NAME");
+        String getMail = regData.get("USER_EMAIL");
+        String getPhone = regData.get("USER_PHONE");
+        String getAddr = regData.get("USER_ADDR");
+        String getRrn = regData.get("RRN");
         MemberDAO dao = new MemberDAO();
         boolean isTrue = dao.memberRegister(getId, getPwd, getPwdCh,getName, getMail, getPhone, getAddr, getRrn);
         // DAO 객체의 memberRegister 메소드를 호출하여 회원 가입을 처리, 이후 결과를 isTrue 변수에 저장

@@ -97,13 +97,13 @@ public class MemberDAO {
 
     // 회원가입
 
-    public boolean memberRegister(String USER_ID, String USER_NAME, String USER_PWD, String USER_PWDCH,
-                                  String USER_EMAIL, String RRN, String USER_PHONE, String USER_ADDR) {
-        System.out.println("들어왔음      USER_ID: " + USER_ID + " USER_NAME : " + USER_NAME + " USER_PWD : " + USER_PWD +
-                " USER_PWDCH : " + USER_PWDCH + " USER_EMAIL : " + USER_EMAIL + " RRN : " + RRN + " USER_PHONE : " + USER_PHONE + " USER_ADDR : " + USER_ADDR);
+    public boolean memberRegister(String USER_ID,  String USER_PWD, String USER_PWDCH, String USER_NAME,
+                                  String USER_EMAIL, String USER_PHONE, String USER_ADDR, String RRN) {
+        System.out.println("들어왔음      USER_ID: " + USER_ID + " USER_PWD : " + USER_PWD + " USER_PWD : " + USER_PWDCH +
+                " USER_NAME : " + USER_NAME + " USER_EMAIL : " + USER_EMAIL + " RRN : " + RRN + " USER_PHONE : " + USER_PHONE + " USER_ADDR : " + USER_ADDR);
 
         int result = 0;
-        String sql = "INSERT INTO USERS(USER_ID,  USER_PWD, USER_PWDCH, USER_NAME, USER_EMAIL,  RRN,  USER_PHONE, USER_ADDR, JOIN_DATE) " +
+        String sql = "INSERT INTO USERS(USER_ID,  USER_PWD, USER_PWDCH, USER_NAME, USER_EMAIL, USER_PHONE, RRN, USER_ADDR, JOIN_DATE) " +
                 "VALUES(?, ?, ?, ?, ?, ?, ?, ?, SYSDATE)";
         try {
             conn = Common.getConnection();
@@ -113,9 +113,10 @@ public class MemberDAO {
             pstmt.setString(3, USER_PWDCH);
             pstmt.setString(4, USER_NAME);
             pstmt.setString(5, USER_EMAIL);
-            pstmt.setString(6, RRN);
-            pstmt.setString(7, USER_PHONE);
+            pstmt.setString(6, USER_PHONE);
+            pstmt.setString(7, RRN);
             pstmt.setString(8, USER_ADDR);
+
             System.out.println("Dao" + USER_ADDR);
 
             result = pstmt.executeUpdate();
