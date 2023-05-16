@@ -99,19 +99,12 @@ public class MemberDAO {
 
     public boolean memberRegister(String USER_ID, String USER_NAME, String USER_PWD, String USER_PWDCH,
                                   String USER_EMAIL, String RRN, String USER_PHONE, String USER_ADDR) {
-
+        System.out.println("들어왔음      USER_ID: " + USER_ID + " USER_NAME : " + USER_NAME + " USER_PWD : " + USER_PWD +
+                " USER_PWDCH : " + USER_PWDCH + " USER_EMAIL : " + USER_EMAIL + " RRN : " + RRN + " USER_PHONE : " + USER_PHONE + " USER_ADDR : " + USER_ADDR);
 
         int result = 0;
         String sql = "INSERT INTO USERS(USER_ID,  USER_PWD, USER_PWDCH, USER_NAME, USER_EMAIL,  RRN,  USER_PHONE, USER_ADDR, JOIN_DATE) " +
                 "VALUES(?, ?, ?, ?, ?, ?, ?, ?, SYSDATE)";
-        System.out.println(USER_ID);
-        System.out.println(USER_PWD);
-        System.out.println(USER_PWDCH);
-        System.out.println(USER_NAME);
-        System.out.println(USER_EMAIL);
-        System.out.println(RRN);
-        System.out.println(USER_PHONE);
-        System.out.println(USER_ADDR);
         try {
             conn = Common.getConnection();
             pstmt = conn.prepareStatement(sql);

@@ -56,7 +56,7 @@ public class SongDAO {
             conn = Common.getConnection();
             stmt = conn.createStatement(); // Statement 객체 얻기
             System.out.println("송DAO_TRY : " + title);
-            String sql = "SELECT * FROM SONG WHERE TITLE  Like " + "'%" + title + "%'OR ARTIST LIKE " + "'%" + title + "%' ORDER BY TITLE";
+            String sql = "SELECT * FROM SONG WHERE TITLE  Like " + "'%" + title + "%'OR ARTIST=" + "'%" + title + "%' ORDER BY TITLE";
             rs = stmt.executeQuery(sql);
             System.out.println(sql);
             while (rs.next()) { // 읽은 데이타가 있으면 true
@@ -76,10 +76,6 @@ public class SongDAO {
                 vo.setSong_url(sqlUrl);
                 vo.setCover_url(coverUrl);
                 list.add(vo);
-                System.out.println(songTitle);
-                System.out.println(sqlUrl);
-                System.out.println(coverUrl);
-
             }
             Common.close(rs);
             Common.close(stmt);
@@ -89,8 +85,6 @@ public class SongDAO {
         }
         return list;
     }
-
-
 
     // 노래정보
     public List<SongVO> songInfo(String title) {
