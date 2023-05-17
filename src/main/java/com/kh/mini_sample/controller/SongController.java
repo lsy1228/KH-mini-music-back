@@ -11,16 +11,6 @@ import java.util.Map;
 @CrossOrigin(origins = "http://192.168.110.22:3000")
 @RestController
 public class SongController {
-    // GET : 노래조회
-    @GetMapping("/song")
-    public ResponseEntity<List<SongVO>> songList(@RequestParam String title) {
-        System.out.println("title : " + title);
-        SongDAO dao = new SongDAO();
-        List<SongVO> list = dao.songSelect(title);
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
-
-
 
     @PostMapping("/findsong")
     //POST : 노래찾기
@@ -30,7 +20,6 @@ public class SongController {
         List<SongVO> url = sDao.songCheck(title);
         return new ResponseEntity<>(url, HttpStatus.OK);
     }
-
 
     // 앨범정보
     @GetMapping("/album")
