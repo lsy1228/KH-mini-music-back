@@ -22,11 +22,7 @@ public class LikeDAO {
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement();
-            String sql = "SELECT S.SONG_ID, S.TITLE, S.ARTIST, S.SONG_URL, S.COVER_URL, COUNT(L.LIKE_ID) AS LIKE_COUNT " +
-                    "FROM SONG S " +
-                    "JOIN LIKES L ON S.SONG_ID = L.SONG_ID " +
-                    "GROUP BY S.SONG_ID, S.TITLE, S.ARTIST, S.SONG_URL, S.COVER_URL " +
-                    "ORDER BY LIKE_COUNT DESC, S.TITLE ASC";
+            String sql = "SELECT B.SONG_ID, B.TITLE, B.ARTIST, B.SONG_URL, B.COVER_URL, B.LIKE_COUNT, L.USER_ID FROM (SELECT S.SONG_ID, S.TITLE, S.ARTIST,S.SONG_URL,S.COVER_URL, COUNT(L.LIKE_ID) AS LIKE_COUNT FROM SONG S LEFT JOIN LIKES L ON S.SONG_ID = L.SONG_ID GROUP BY S.SONG_ID, S.TITLE, S.ARTIST,S.SONG_URL,S.COVER_URL ORDER BY LIKE_COUNT DESC, S.TITLE ASC) B LEFT JOIN (SELECT S.SONG_ID,L.USER_ID FROM SONG S JOIN LIKES L ON S.SONG_ID = L.SONG_ID where L.USER_ID='" + id + "' GROUP BY S.SONG_ID, L.USER_ID ORDER BY S.SONG_ID) L ON B.SONG_ID = L.SONG_ID GROUP BY B.SONG_ID, B.TITLE, B.ARTIST, B.SONG_URL, B.COVER_URL, B.LIKE_COUNT, L.USER_ID ORDER BY B.Like_COUNT DESC;";
             rs = stmt.executeQuery(sql);
 
             while(rs.next()) {

@@ -102,6 +102,7 @@ public class MemberController {
         // ResponseEntity 클라이언트에게 응답을 보낼 때 사용하는 객체
     }
 
+
     // 메일인증코드 확인
     @PostMapping("/verify") // 주소창에 인증코드가 뜨지 않기 위해 post 방식 사용
     public ResponseEntity<Boolean> verifyCode(@RequestBody Map<String, String> mailData) {
@@ -109,7 +110,6 @@ public class MemberController {
         int code = Integer.parseInt(mailData.get("code"));
         System.out.println("메일 : " + mail + ", 코드" + code);
         boolean isTrue = mailService.verifyCode(mail, code);
-
         return new ResponseEntity<>(isTrue, HttpStatus.OK);
     }
 
