@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://192.168.110.22:3000")
 @RestController
 public class LikeController {
     // Get : 좋아요 수 많은 순으로 노래조회

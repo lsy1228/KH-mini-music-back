@@ -37,6 +37,17 @@ public class MailService {
         return message;
     }
 
+    // 이메일 유효성 검사
+    public boolean validateCode(int code) {
+        return code == number;
+    }
+    // 이메일로 보내진 코드와 입력창에 적힌 코드가 같아야 true
+
+    public boolean verifyCode(String mail, int code) {
+        return validateCode(code);
+    }
+
+
     public int sendMail(String mail) { // 생성한 인증 이메일을 입력 받은 mail주소로 전송
         MimeMessage message = CreateMail(mail);
         javaMailSender.send(message);

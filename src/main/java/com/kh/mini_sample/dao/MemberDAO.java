@@ -133,6 +133,8 @@ public class MemberDAO {
     }
 
 
+
+    // 회원 탈퇴
     public boolean secCheck(String id, String pwd) {
         try {
             conn = Common.getConnection();
