@@ -17,6 +17,9 @@ import java.util.List;
 public class LikeController {
     // Get : 좋아요 수 많은 순으로 노래조회
     @GetMapping("/songChart")
+
+
+
     public ResponseEntity<List<SongVO>> songChart(@RequestParam String id) {
         System.out.println("id : " + id);
         LikeDAO dao = new LikeDAO();
