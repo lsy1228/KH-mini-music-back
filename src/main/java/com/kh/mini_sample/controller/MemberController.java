@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://192.168.110.22:3000") // 다른 도메인에서 해당 API접근 가능
+@CrossOrigin(origins = "http://localhost:3000") // 다른 도메인에서 해당 API접근 가능
 @RestController
 @RequiredArgsConstructor // final로 선언된 필드나, @NonNull인 필드값만을 파라미터로 받는 생성자를 생성
 
@@ -89,7 +89,34 @@ public class MemberController {
     }
 
 
+    @PostMapping("/searchId") // 주소창에 인증코드가 뜨지 않기 위해 post 방식 사용
+    // 아이디 찾기
+    public ResponseEntity<List<MemberVO>> searchId(@RequestBody Map<String, String> searchData){
+        String name = searchData.get("name"); //키 값이 입력되어 value 값을 출력 할 수 있다.
+        String email = searchData.get("email"); //키 값이 입력되어 value 값을 출력 할 수 있다.
+        System.out.println("이름 : " + name);
+        System.out.println("이메일 : " + email);
+        MemberDAO dao = new MemberDAO();
+        List<MemberVO> list = dao.searchId(name, email);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 
+
+    @PostMapping("/searchPw") // 주소창에 인증코드가 뜨지 않기 위해 post 방식 사용
+    // 비밀번호 찾기
+    public ResponseEntity<List<MemberVO>> searchPw(@RequestBody Map<String, String> searchData){
+        String name = searchData.get("name");   //키 값이 입력되어 value 값을 출력 할 수 있다.
+        String email = searchData.get("email"); //키 값이 입력되어 value 값을 출력 할 수 있다.
+        String id = searchData.get("id");       //키 값이 입력되어 value 값을 출력 할 수 있다.
+        System.out.println("이름 : " + name);
+        System.out.println("이메일 : " + email);
+        MemberDAO dao = new MemberDAO();
+        List<MemberVO> list = dao.searchPw(name, email, id);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+
+    // 이메일 인증
     private final MailService mailService;
     @GetMapping("/mail") // getMapping어노테이션을 사용해 /mail요청을 받음
     public  ResponseEntity<String> MailSend(@RequestParam String mail){

@@ -57,7 +57,7 @@ public class SongDAO {
             conn = Common.getConnection();
             stmt = conn.createStatement(); // Statement 객체 얻기
             System.out.println("송DAO_TRY : " + title);
-            String sql = "SELECT * FROM SONG WHERE TITLE  Like " + "'%" + title + "%'OR ARTIST=" + "'%" + title + "%' ORDER BY TITLE";
+            String sql = "SELECT * FROM SONG WHERE TITLE  Like " + "'%" + title + "%'OR ARTIST Like " + "'%" + title + "%' ORDER BY TITLE";
             rs = stmt.executeQuery(sql);
             System.out.println(sql);
             while (rs.next()) { // 읽은 데이타가 있으면 true

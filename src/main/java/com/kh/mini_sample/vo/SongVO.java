@@ -17,4 +17,5 @@ public class SongVO {
     private int ALBUM_ID;
     private Date Release;
     private String info;
+    private String user_id;
 }

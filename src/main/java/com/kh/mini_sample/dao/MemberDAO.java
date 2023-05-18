@@ -168,4 +168,62 @@ public class MemberDAO {
         }
         return false;
     }
+
+
+    // 아이디 찾기
+    public List<MemberVO> searchId(String name, String email) {
+        List<MemberVO> list = new ArrayList<>();
+        try {
+            conn = Common.getConnection();
+            stmt = conn.createStatement(); // Statement 객체 얻기
+            String sql = "SELECT * FROM USERS WHERE USER_EMAIL = " + "'" + email + "' AND USER_NAME = '" + name + "'";
+            rs = stmt.executeQuery(sql);
+            System.out.println("이름 : " + name);
+            System.out.println("이메일: " + email);
+
+            while (rs.next()) { // 읽은 데이타가 있으면 true
+                String user_id = rs.getString("USER_ID");
+                MemberVO vo = new MemberVO();
+                vo.setUSER_ID(user_id);
+                list.add(vo);
+                System.out.println(user_id);
+            }
+                    Common.close(rs);
+                    Common.close(stmt);
+                    Common.close(conn);
+                } catch (Exception e){
+            e.printStackTrace();
+            }
+        return list;
+    }
+
+
+    // 비밀번호 찾기
+    public List<MemberVO> searchPw(String name, String email, String id) {
+        List<MemberVO> list = new ArrayList<>();
+        try {
+            conn = Common.getConnection();
+            stmt = conn.createStatement(); // Statement 객체 얻기
+            String sql = "SELECT * FROM USERS WHERE USER_EMAIL = " + "'" + email + "' AND USER_NAME = '" + name + "' AND USER_ID = '" + id + "'";
+            rs = stmt.executeQuery(sql);
+            System.out.println("이름 : " + name);
+            System.out.println("이메일 : " + email);
+            System.out.println("아이디 : " + id);
+
+            while (rs.next()) { // 읽은 데이타가 있으면 true
+                String user_pwd = rs.getString("USER_PWD");
+                MemberVO vo = new MemberVO();
+                vo.setUSER_PWD(user_pwd);
+                list.add(vo);
+                System.out.println(user_pwd);
+            }
+            Common.close(rs);
+            Common.close(stmt);
+            Common.close(conn);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return list;
+    }
 }
