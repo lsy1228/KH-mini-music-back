@@ -52,5 +52,50 @@ public class LikeDAO {
         }
         return list;
     }
+    public boolean songLikeInsert(String id, String song_id) {
+        int result = 0;
+        System.out.println(id);
+        System.out.println(song_id);
+        String sql = "INSERT INTO LIKES(LIKE_ID, USER_ID, SONG_ID) VALUES (LIKE_NUM.NEXTVAL,?,?)";
+        try {
+            conn = Common.getConnection();
+            pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1, id);
+            pStmt.setString(2, song_id);
+            result = pStmt.executeUpdate();
+            System.out.println("결과확인 : " + result);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        Common.close(pStmt);
+        Common.close(conn);
+
+        if(result == 1) return true;
+        else return false;
+    }
+    public boolean songlikeDelete(String id, String song_id) {
+        int result = 0;
+        System.out.println(id);
+        System.out.println(song_id);
+        String sql = "DELETE FROM LIKES WHERE USER_ID = ? AND SONG_ID = ?";
+        try {
+            conn = Common.getConnection();
+            pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1, id);
+            pStmt.setString(2, song_id);
+            result = pStmt.executeUpdate();
+            System.out.println("결과확인 : " + result);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Common.close(pStmt);
+        Common.close(conn);
+        if(result == 1) return true;
+        else return false;
+    }
+
+
 
 }
