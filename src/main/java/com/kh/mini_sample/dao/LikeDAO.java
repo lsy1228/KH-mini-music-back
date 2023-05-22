@@ -91,7 +91,35 @@ public class LikeDAO {
         if(result == 1) return true;
         else return false;
     }
+    public List<SongVO> playList (String id) {
+        List<SongVO> list = new ArrayList<>();
+        try {
+            conn = Common.getConnection();
+            stmt = conn.createStatement();
+            String sql = "SELECT S.SONG_ID, S.TITLE, S.ARTIST, S.SONG_URL, S.COVER_URL FROM SONG S JOIN LIKES L ON S.SONG_ID = L.SONG_ID WHERE USER_ID = " + "'" + id + "'";
+            rs = stmt.executeQuery(sql);
 
+            while(rs.next()) {
+                SongVO vo = new SongVO();
+                int songId = rs.getInt("SONG_ID");
+                String songTitle = rs.getString("TITLE");
+                String songArtist = rs.getString("ARTIST");
+                String songUrl = rs.getString("SONG_URL");
+                String coverUrl = rs.getString("COVER_URL");
 
-
+                vo.setSongId(songId);
+                vo.setTitle(songTitle);
+                vo.setArtist(songArtist);
+                vo.setSong_url(songUrl);
+                vo.setCover_url(coverUrl);
+                list.add(vo);
+        }
+            Common.close(rs);
+            Common.close(stmt);
+            Common.close(conn);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

@@ -44,5 +44,13 @@ public class LikeController {
         boolean isTrue = dao.songlikeDelete(id, songId);
         return new ResponseEntity<>(isTrue, HttpStatus.OK);
     }
+
+    @GetMapping("/myPlaylist")
+    public ResponseEntity<List<SongVO>> playList(@RequestParam String id) {
+        System.out.println("id : " + id);
+        LikeDAO dao = new LikeDAO();
+        List<SongVO> list = dao.playList(id);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 }
 
