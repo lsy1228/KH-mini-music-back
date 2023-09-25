@@ -12,12 +12,19 @@ import java.util.Map;
 @RestController
 public class SongController {
 
-    @PostMapping("/findsong")
+//    @PostMapping("/findsong")
     //POST : 노래찾기
-    public ResponseEntity<List<SongVO>> findSong(@RequestBody Map<String, String> titleData){
+//    public ResponseEntity<List<SongVO>> findSong(@RequestBody Map<String, String> titleData){
+//        String title = titleData.get("title");
+//        SongDAO sDao = new SongDAO();
+//        List<SongVO> url = sDao.songCheck(title);
+//        return new ResponseEntity<>(url, HttpStatus.OK);
+//    }
+    @PostMapping("/findsong")
+    public ResponseEntity<SongVO> findSong(@RequestBody Map<String, String> titleData){
         String title = titleData.get("title");
         SongDAO sDao = new SongDAO();
-        List<SongVO> url = sDao.songCheck(title);
+        SongVO url = sDao.songCheck(title);
         return new ResponseEntity<>(url, HttpStatus.OK);
     }
 

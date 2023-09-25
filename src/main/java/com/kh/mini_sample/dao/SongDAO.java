@@ -51,13 +51,49 @@ public class SongDAO {
 
     // 특정 노래 검색
     //노래찾기
-    public List<SongVO> songCheck(String title) {
-        List<SongVO> list = new ArrayList<>();
+//    public List<SongVO> songCheck(String title) {
+//        List<SongVO> list = new ArrayList<>();
+//        try {
+//            conn = Common.getConnection();
+//            stmt = conn.createStatement(); // Statement 객체 얻기
+//            System.out.println("송DAO_TRY : " + title);
+//            String sql = "SELECT * FROM SONG WHERE TITLE  Like " + "'%" + title + "%'OR ARTIST Like " + "'%" + title + "%' ORDER BY TITLE";
+//            rs = stmt.executeQuery(sql);
+//            System.out.println(sql);
+//            while (rs.next()) { // 읽은 데이타가 있으면 true
+//                int songId = rs.getInt("SONG_ID");
+//                String songTitle = rs.getString("TITLE");
+//                String albumName = rs.getString("ALBUM_NAME");
+//                String songArtist = rs.getString("ARTIST");
+//                String lyric = rs.getString("LYRICS");
+//                String sqlUrl = rs.getString("SONG_URL"); // 쿼리문 수행 결과에서 ID값을 가져 옴
+//                String coverUrl = rs.getString("COVER_URL");
+//                SongVO vo = new SongVO();
+//                vo.setSongId(songId);
+//                vo.setTitle(songTitle);
+//                vo.setAlbumName(albumName);
+//                vo.setArtist(songArtist);
+//                vo.setLyrics(lyric);
+//                vo.setSong_url(sqlUrl);
+//                vo.setCover_url(coverUrl);
+//                list.add(vo);
+//            }
+//            Common.close(rs);
+//            Common.close(stmt);
+//            Common.close(conn);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return list;
+//    }
+
+    public SongVO songCheck(String title) {
+        SongVO vo = new SongVO();
         try {
             conn = Common.getConnection();
             stmt = conn.createStatement(); // Statement 객체 얻기
             System.out.println("송DAO_TRY : " + title);
-            String sql = "SELECT * FROM SONG WHERE TITLE  Like " + "'%" + title + "%'OR ARTIST Like " + "'%" + title + "%' ORDER BY TITLE";
+            String sql = "SELECT * FROM SONG WHERE TITLE LIKE " + "'%" + title + "%'OR ARTIST LIKE " + "'%" + title + "%' ORDER BY TITLE";
             rs = stmt.executeQuery(sql);
             System.out.println(sql);
             while (rs.next()) { // 읽은 데이타가 있으면 true
@@ -68,7 +104,6 @@ public class SongDAO {
                 String lyric = rs.getString("LYRICS");
                 String sqlUrl = rs.getString("SONG_URL"); // 쿼리문 수행 결과에서 ID값을 가져 옴
                 String coverUrl = rs.getString("COVER_URL");
-                SongVO vo = new SongVO();
                 vo.setSongId(songId);
                 vo.setTitle(songTitle);
                 vo.setAlbumName(albumName);
@@ -76,7 +111,6 @@ public class SongDAO {
                 vo.setLyrics(lyric);
                 vo.setSong_url(sqlUrl);
                 vo.setCover_url(coverUrl);
-                list.add(vo);
             }
             Common.close(rs);
             Common.close(stmt);
@@ -84,7 +118,7 @@ public class SongDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return list;
+        return vo;
     }
 
     // 노래정보
